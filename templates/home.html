@@ -1,10 +1,29 @@
-<!DOCTYPE html>
+{% extends "layout.html" %}
 
-<html lang="en">
-    <head>
-        <title>tentips home</title>
-    </head>
-    <body>
-        <h1 style="text-align: center;">tentips</h1>
-    </body>
-</html>
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+    <div id="homepage">
+        <div id="home-view">
+            <div id="header">
+                <p id="header-tip"><span style="font-size:3rem;">Tip</span><br> Invest in your skills: Continuously improve and invest in your skills and abilities. Your ability to earn and create wealth is directly linked to your knowledge and expertise.<br><span style="font-size: 5rem;">📖</span></p>
+                <button id="change-color" title="Change color">🖌️</button>
+            </div>
+            {% for category in categories %}
+                <section class="categories">
+                    <h1>{{ category[0].capitalize() }}:-</h1>
+                    <hr>
+                    {% for book in books %}
+                        {% if book[6] == category[0] %}
+                            <div class="show-book">
+                                <a href="/tips/{{ book[0] }}"><img class="book-cover" title="{{ book[1] }}" src="{{ book[4] }}" alt="book-cover"></a><br>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </section>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

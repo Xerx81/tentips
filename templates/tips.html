@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+    <div id="tips-page">
+        <div id="sidebar">
+
+        </div>
+        <div style="text-align: center">
+            <img style="width: 20%" src="{{ book[4] }}" alt="book cover">
+        </div>
+        <h3 style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">{{ book[1] }} by {{ book[2] }}</h3>
+        <hr>
+        <p style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">{{ book[3] }}</p>
+        <ol>
+            {% for tip in book[5].split('#') %}
+                <li style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
+                    {% set parts = tip.split(':') %}
+                    <strong style="color:coral">{{ parts[0] }}:</strong> <span style="color: black">{{ parts[1] }}</span>
+                </li>
+                <br>
+            {% endfor %}
+        </ol>
+    </div>
+{% endblock%}

@@ -1,0 +1,270 @@
+.reg-box {
+    text-align: center;
+    margin: 7rem auto auto auto;
+    border: 1px solid black;
+    min-width: 20rem;
+    max-width: 27rem;
+}
+
+#reg-logo {
+    font-family:'Courier New', Courier, monospace;
+}
+
+#reg-info {
+    text-align: center;
+    margin: 2rem 3rem 1rem 3rem;
+    color: darkslategray;
+}
+
+
+.reg-form {
+    margin: 2rem auto 2rem auto;
+}
+
+#reg-inp {
+    margin: 5px;
+    padding: 0px 10px 0px 10px;
+    width: 18rem;
+    height: 2rem;
+    font-size: 15px;
+    color: rgb(25, 25, 25);
+    border: 1px solid gray;
+}
+
+#reg-inp:focus {
+    outline: none;
+    border: 1px solid rgb(0, 136, 255);
+}
+
+#reg-btn {
+    margin: 7px;
+    padding: 7px;
+    width: 19.4rem;
+    background-color: rgb(65, 187, 235);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+#reg-btn:hover {
+    background-color: rgb(0, 161, 224);
+}
+
+#reg-caution {
+    text-align: center;
+    margin: 2rem 3rem 2rem 3rem;
+    color: rgb(255, 89, 89); 
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 15px;
+}
+
+#reg-redirect {
+    color: darkslategray;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#reg-redirect a {
+    text-decoration: none;
+}
+
+
+body {
+    margin: 0;    
+}
+
+.navbar {
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 0px 2px 3px rgb(192, 192, 192);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1;
+}
+
+.logo {
+    font-family:'Courier New', Courier, monospace;
+    float: left;
+    text-align: center;
+    margin: 10px 20px;
+}
+
+.logo h1{
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+.items {
+    margin: auto 20px;
+}
+.items a{
+    float: right;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    font-size: 17px;
+    transition-duration: 0.3s;
+}
+
+.items a:hover, .items a:active {
+    background-color: rgb(238, 247, 255);
+    color: rgb(0, 132, 255);
+}
+
+@media (min-width: 800px) {
+    #bars {
+        display: none;
+    }
+
+    .items a {
+        display: block;
+    }
+}
+
+@media (max-width: 799px) {
+    #bars {
+        display: block;
+    }
+
+    .items a {
+        display: none;
+    }
+}
+
+.search-bar {
+    text-align: center;
+    margin: 10px auto;
+}
+
+#search {
+    width: 20%;
+    height: 30px;
+    padding: 0px 15px;
+    border: 2px solid gray;
+    border-radius: 20px;
+    color:darkslategray;
+    font-size: 17px;
+    position: relative;
+}
+
+#search:focus {
+    border-color: darkcyan;
+    outline: none;
+    box-shadow: 0px 2px 3px darkcyan;
+}
+
+#search-btn {
+    position: absolute;
+    padding: 9px 12px;
+    margin-left: 5px;
+    font-size: 15px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#search-btn:hover {
+    background-color: darkcyan;
+    outline: none;
+    color: white;
+}
+
+#homepage {
+    padding: 3.5rem 0rem;
+    background-color: lightgray;
+}
+
+
+.categories {
+    background-color: white; 
+    padding: 1rem 2rem;
+    margin: 1rem;
+    min-width: 10rem;
+    min-height: 20rem;
+    margin-top: 0;
+    overflow: hidden;
+}
+
+.categories:hover {
+    background-color: whitesmoke;
+}
+
+.categories>h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.show-book {
+    width: 8rem; 
+    float: left;
+    margin: 1rem;
+}
+
+hr {
+    border: 1px solid darkgray;
+    margin: 1rem 0rem;
+}
+
+.book-cover {
+    width: 100%;
+    transition: 0.2s;
+}
+
+.book-cover:hover {
+    transform: scale(1.01);
+    box-shadow: 0px 5px 10px gray;
+    cursor: pointer;
+}
+
+#header {
+    min-height: 20rem;
+    text-align:center; 
+    position: relative; 
+    overflow:scroll;
+}
+
+#header::-webkit-scrollbar {
+    display: none;
+}
+
+#header-tip {
+    top: 2%; 
+    right: 2%; 
+    left: 2%; 
+    position: absolute; 
+    font-family: 'brush script mt', sans-serif; 
+    font-size: 2rem;
+}
+
+#change-color {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: lightblue;
+    border: 1px solid white;
+    border-radius: 3px;
+    font-size: 15px;
+    transition: 0.2s;
+}
+
+#change-color:hover {
+    outline : none;
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+#change-color:focus {
+    outline: none;
+}
+
+#tips-page, #admin-page {
+    padding: 5rem 3rem;
+}
