@@ -8,3 +8,16 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('#change-color').style.backgroundColor = colors[color_index]; 
     })
 })
+
+function yellow() {
+    const favBtn = document.getElementById('addtofav');
+
+    favBtn.classList.toggle('clicked');
+    setTimeout(() => {
+        favBtn.classList.toggle('yellow');
+    }, 100);
+    setTimeout(() => {
+        favBtn.classList.toggle('clicked');
+    }, 100)
+
+}

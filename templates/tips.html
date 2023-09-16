@@ -1,28 +1,41 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Home
+    Tips
 {% endblock %}
 
 {% block main %}
     <div id="tips-page">
-        <div id="sidebar">
-
+        <div id =container>
+            <div id="sidebar">
+                <div style="text-align: center">
+                    <img id="sidebar-img" src="{{ book[4] }}" alt="book cover">
+                </div>
+            </div>
+            <div id="content">
+                <h3>{{ book[1] }} by {{ book[2] }} <i class="fa fa-star icon addtofav" id="addtofav" title="Add to favorites" onclick="yellow()"></i></h3>
+                <hr>
+                <p>{{ book[3] }}</p>
+                <ol>
+                    {% for tip in book[5].split('#') %}
+                        <li>
+                            {% set parts = tip.split(':') %}
+                            <strong style="color:coral">{{ parts[0] }}:</strong> <span style="color: black">{{ parts[1] }}</span>
+                        </li>
+                        <br>
+                    {% endfor %}
+                </ol>
+            </div>
         </div>
-        <div style="text-align: center">
-            <img style="width: 20%" src="{{ book[4] }}" alt="book cover">
-        </div>
-        <h3 style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">{{ book[1] }} by {{ book[2] }}</h3>
-        <hr>
-        <p style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">{{ book[3] }}</p>
-        <ol>
-            {% for tip in book[5].split('#') %}
-                <li style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
-                    {% set parts = tip.split(':') %}
-                    <strong style="color:coral">{{ parts[0] }}:</strong> <span style="color: black">{{ parts[1] }}</span>
-                </li>
-                <br>
+        <div id="recommendation">
+            <h2>You might also like:</h2>
+            {% for sim_book in sim_books %}
+                {% if sim_book[0] != book[0] %}
+                    <div class="show-book">
+                        <a href="/tips/{{ sim_book[0] }}"><img class="book-cover" title="{{ sim_book[1] }}" src="{{ sim_book[4] }}" alt="book-cover"></a><br>
+                    </div>
+                {% endif %}
             {% endfor %}
-        </ol>
+        </div>
     </div>
 {% endblock%}

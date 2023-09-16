@@ -27,7 +27,7 @@ def after_request(response):
 
 @app.route("/")
 @login_required
-def home():
+def index():
     with sqlite3.connect("tentips.db") as con:
         db = con.cursor()
 
@@ -46,7 +46,7 @@ def home():
         categories = db.execute("SELECT category FROM categories")
         categories = categories.fetchall()
         
-        return render_template("home.html",
+        return render_template("index.html",
             books=books,
             categories=categories
         )   
@@ -58,28 +58,46 @@ def admin():
     with sqlite3.connect("tentips.db") as con:
         db = con.cursor()
 
+        # Show this page to admin only
         admin_username = "yuvraj"
         admin_id = db.execute("SELECT id FROM users WHERE username = ?", [admin_username])
         admin_id = admin_id.fetchone()
-        
+
         if session["id"] != admin_id[0]:
             return "not allowed"
+
 
         if request.method == "POST":
             title = request.form.get("title")
             title = title.title()
+
             author = request.form.get("author")
             author = author.title()
+
             description = request.form.get("description")
             image = request.form.get("image")
             tips = request.form.get("tips")
-            category = request.form.get("category")
 
+            try:
+                category = request.form.get("new_category")
+
+                # Check if category already exists
+                c = db.execute("SELECT category FROM categories WHERE category = ?", [category])
+                c = c.fetchone()
+                if c:
+                    return "Category already exist"
+                db.execute("INSERT INTO categories (category) VALUES (?)", (category,))
+                con.commit()
+            except:
+                category = request.form.get("category")
+
+            # Check if book title already exists
             book = db.execute("SELECT * FROM books WHERE title = ?", [title])
             book = book.fetchall()
 
             if len(book) < 1:
                 db.execute("INSERT INTO books (title, author, description, image, tips, category_id) VALUES (?, ?, ?, ?, ?, ?)", (title, author, description, image, tips, category))
+                con.commit()
 
             return redirect("/")
         else:
@@ -96,12 +114,17 @@ def tips(book_id=0):
     with sqlite3.connect("tentips.db") as con:
         db = con.cursor()
 
+        # Get the book of given id
         book = db.execute("SELECT * FROM books WHERE id = ?", [book_id])
         book = book.fetchone()
-        print(book)
 
-    return render_template("tips.html",
-            book=book
+        # Get the books with the same category as above book
+        sim_books = db.execute("SELECT * FROM books WHERE category_id = ?", [book[6]])
+        sim_books = sim_books.fetchall()
+
+        return render_template("tips.html",
+            book=book,
+            sim_books=sim_books
         )
 
 
