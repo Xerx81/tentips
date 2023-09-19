@@ -13,7 +13,7 @@
             </div>
             {% for category in categories %}
                 <section class="categories">
-                    <h1>{{ category[0].capitalize() }}:-</h1>
+                    <h1>{{ category[1].capitalize() }}:-</h1>
                     <hr>
                     {% for book in books %}
                         {% if book[6] == category[0] %}
