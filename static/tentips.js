@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
+
+    // Change color theme of index page
     const colors = ['lightblue', 'lightpink', '#ffe8b6', '#97DDDA', 'lightgray'];
     let color_index = 0;
     

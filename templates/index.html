@@ -8,7 +8,7 @@
     <div id="homepage">
         <div id="home-view">
             <div id="header">
-                <p id="header-tip"><span style="font-size:3rem;">Tip</span><br> Invest in your skills: Continuously improve and invest in your skills and abilities. Your ability to earn and create wealth is directly linked to your knowledge and expertise.<br><span style="font-size: 5rem;">📖</span></p>
+                <p id="header-tip"><span style="font-size:3rem;">Tip</span><br><span style="color: red">{{ rand_tip[0] }}: </span>{{ rand_tip[1] }}<br><span style="font-size: 5rem;">📖</span></p>
                 <button id="change-color" title="Change color">🖌️</button>
             </div>
             {% for category in categories %}

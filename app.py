@@ -2,6 +2,7 @@ import sqlite3
 
 from flask import Flask, redirect, render_template, request, session
 from flask_session import Session
+from random import choice
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from myfunc import login_required
@@ -45,11 +46,16 @@ def index():
 
         categories = db.execute("SELECT * FROM categories")
         categories = categories.fetchall()
-        print(categories)
+
+        # Randome tip
+        rand_book = choice(books)
+        rand_tip = choice(rand_book[5].split('#'))
+        rand_tip = rand_tip.split(':')
         
         return render_template("index.html",
             books=books,
-            categories=categories
+            categories=categories,
+            rand_tip = rand_tip
         )   
         
             
@@ -146,7 +152,7 @@ def favorites():
         fav_books = db.execute("SELECT * FROM favorites JOIN books ON book_id=books.id WHERE user_id= ?", [user_id]) 
         fav_books = fav_books.fetchall()
 
-        return fav_books
+        return render_template("favorites.html")
 
 
 @app.route("/register", methods=["GET", "POST"])
