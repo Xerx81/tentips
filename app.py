@@ -1,6 +1,6 @@
 import sqlite3
 
-from flask import Flask, redirect, render_template, request, session
+from flask import Flask, jsonify, redirect, render_template, request, session
 from flask_session import Session
 from random import choice
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -26,13 +26,14 @@ def after_request(response):
     return response
 
 
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 @login_required
 def index():
     with sqlite3.connect("tentips.db") as con:
         db = con.cursor()
 
-        books = db.execute("SELECT * FROM books")
+        
+        books = db.execute("SELECT * FROM books ORDER BY id DESC")
         books = books.fetchall()
 
         # for book in books
@@ -47,18 +48,65 @@ def index():
         categories = db.execute("SELECT * FROM categories")
         categories = categories.fetchall()
 
-        # Randome tip
+        # Random tip
         rand_book = choice(books)
+        rand_title = rand_book[1]
         rand_tip = choice(rand_book[5].split('#'))
         rand_tip = rand_tip.split(':')
-        
+
+        # Search
+        if request.method == 'POST':
+
+            searched_title = request.form.get('search')
+            searched_title_cap = searched_title.title()
+                    
+            # Use '%' to match any characters before and after the search term
+            search_query = f"%{searched_title_cap}%"
+
+            # Execute the SQL query to search for titles and fetch them
+            search_results = db.execute("SELECT * FROM books WHERE title LIKE ?", (search_query, ))
+            search_results = search_results.fetchall()
+            # not_found = ""
+            # if not search_results:
+            #     not_found = "Book not found"
+
+            return render_template("index.html",
+                search_results=search_results,
+                # not_found=not_found,
+                searched_title=searched_title
+            )
+
         return render_template("index.html",
             books=books,
             categories=categories,
-            rand_tip = rand_tip
+            rand_tip = rand_tip,
+            rand_title=rand_title,
         )   
-        
-            
+
+
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    with sqlite3.connect("tentips.db") as con:
+        db = con.cursor()
+
+        # Search
+        if request.method == 'POST':
+
+            searched_title_cap = request.form.get('search')
+            searched_title_cap = searched_title_cap.title()
+                    
+            # Use '%' to match any characters before and after the search term
+            search_query = f"%{searched_title_cap}%"
+
+            # Execute the SQL query to search for titles and fetch them
+            search_results = db.execute("SELECT title FROM books WHERE title LIKE ?", (search_query, ))
+            search_results = search_results.fetchall()
+            if not search_results:
+                search_results = "Book not found"
+
+            return search_results
+
+
 @app.route("/admin", methods=["GET", "POST"])
 @login_required
 def admin():
@@ -123,8 +171,8 @@ def admin():
             )
 
 
-@app.route("/tips/<book_id>")
-def tips(book_id=0):
+@app.route("/tips/<int:book_id>")
+def tips(book_id):
     with sqlite3.connect("tentips.db") as con:
         db = con.cursor()
 
@@ -136,9 +184,19 @@ def tips(book_id=0):
         sim_books = db.execute("SELECT * FROM books WHERE category_id = ?", [book[6]])
         sim_books = sim_books.fetchall()
 
-        return render_template("tips.html",
+        # Get books from favorites table for current user
+        user_id = session["id"]
+        try:
+            fav_book = db.execute("SELECT * FROM favorites WHERE book_id = ? AND user_id = ?", (book_id, user_id)) 
+            fav_book = fav_book.fetchall()
+        except:
+            fav_book = []
+
+        return render_template(
+            "tips.html",
             book=book,
-            sim_books=sim_books
+            sim_books=sim_books,
+            fav_book = fav_book
         )
 
 
@@ -149,10 +207,34 @@ def favorites():
 
         # Get books from favorites table for current user
         user_id = session["id"]
-        fav_books = db.execute("SELECT * FROM favorites JOIN books ON book_id=books.id WHERE user_id= ?", [user_id]) 
+        fav_books = db.execute("SELECT * FROM favorites JOIN books ON book_id=books.id JOIN categories ON category_id = categories.id WHERE user_id= ? ORDER BY title", [user_id]) 
         fav_books = fav_books.fetchall()
 
-        return render_template("favorites.html")
+        return render_template(
+            "favorites.html",
+            fav_books = fav_books
+        )
+
+@app.route("/add/<int:book_id>")
+def addtofav(book_id):
+    with sqlite3.connect("tentips.db") as con:
+        db = con.cursor ()
+
+        user_id = session["id"]
+
+        fav_books = db.execute("SELECT * FROM favorites WHERE user_id= ? AND book_id = ?", (user_id, book_id)) 
+        fav_books = fav_books.fetchall()
+
+        if fav_books:
+
+            # Remove from favorites
+            db.execute("DELETE FROM favorites WHERE user_id = ? AND book_id = ?", (user_id, book_id))
+            return jsonify({'message': 'Removed from favorites'})
+        
+        # Add to favorites
+        db.execute("INSERT INTO favorites (book_id, user_id) VALUES (?, ?)", (book_id, user_id))
+        con.commit()
+        return jsonify({'message': 'Added to favorites'})
 
 
 @app.route("/register", methods=["GET", "POST"])

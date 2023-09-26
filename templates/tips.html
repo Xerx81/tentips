@@ -13,14 +13,21 @@
                 </div>
             </div>
             <div id="content">
-                <h3>{{ book[1] }} by {{ book[2] }} <i class="fa fa-star icon addtofav" id="addtofav" title="Add to favorites" onclick="yellow()"></i></h3>
+                <h3>
+                    {{ book[1] }} by {{ book[2] }}
+                    {% if fav_book %}
+                        <i class="fa fa-star icon addtofav yellow" id="addtofav" title="Add to favorites" onclick="favorite(`{{ book[0] }}`)"></i>
+                    {% else %}
+                        <i class="fa fa-star icon addtofav" id="addtofav" title="Add to favorites" onclick="favorite(`{{ book[0] }}`)"></i>
+                    {% endif %}
+                </h3>
                 <hr>
                 <p>{{ book[3] }}</p>
                 <ol>
                     {% for tip in book[5].split('#') %}
                         <li>
                             {% set parts = tip.split(':') %}
-                            <strong style="color:coral">{{ parts[0] }}:</strong> <span style="color: black">{{ parts[1] }}</span>
+                            <strong style="color:coral">{{ parts[0] }}:</strong> <span>{{ parts[1] }}</span>
                         </li>
                         <br>
                     {% endfor %}

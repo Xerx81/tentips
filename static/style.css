@@ -181,6 +181,7 @@ a {
 #homepage {
     padding: 3.5rem 0rem;
     background-color: lightgray;
+    overflow: hidden;
 }
 
 
@@ -267,7 +268,7 @@ hr {
     outline: none;
 }
 
-#tips-page, #admin-page {
+#tips-page, #admin-page, #fav-page {
     padding: 5rem 3rem;
 }
 
@@ -296,7 +297,7 @@ hr {
     transition: transform 0.1s ease-in-out;
 }
 
-#addtofav:hover {
+.addtofav:hover {
     cursor: cell;
 }
 
@@ -308,3 +309,110 @@ hr {
     transform: scale(1.5);
 }
 
+#fav-page {
+    margin: 0 10vw;
+}
+
+#fav-header {
+    text-align: center;
+    color: #e3c814;
+    font-size: 3vw;
+}
+
+#fav-section {
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 0 10px gray;
+    margin-top: 30px;
+}
+
+.fav-book {
+    margin-bottom: 10px;
+    padding: 20px;
+    overflow: hidden;
+    border-radius: 20px;
+    border-bottom: 1px solid #ffea00;
+    border-top: 1px solid #ffea00;
+    animation-name: hide;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-play-state: paused;
+}
+
+@keyframes hide {
+    0% {
+        opacity: 1;
+        padding: 20px;
+        height: 100%;
+        line-height: 100%;
+        margin-bottom: 10px
+    }
+
+    75% {
+        opacity: 0;
+        padding: 20px;
+        height: 100%;
+        line-height: 100%;
+        margin-bottom: 10px;
+    }
+
+    100% {
+        opacity: 0;
+        padding: 0px;
+        height: 0%;
+        line-height: 0%;
+        margin-bottom: 0px;
+    }
+}
+
+.fav-img {
+    float: left;
+    width: 11%;
+    border: 1px solid black;
+}
+
+.details {
+    margin-left: 10vw;
+    font-family:'Segoe UI', Tahoma, Verdana, sans-serif;
+    font-size: 1vw
+}
+
+.rem-fav {
+    float: right;
+    color: red;
+    font-size: 1.3vw;
+    background: none;
+    border: none;
+}
+
+.rem-fav:hover {
+    cursor: pointer;
+}
+
+.fav-link {
+    color: black;
+    text-decoration: none;
+}
+
+#default-fav {
+    text-align: center;
+    color: gray;
+    font-family:'Segoe UI', Tahoma, Verdana, sans-serif;
+    font-size: 2vw;
+}
+
+#search-view {
+    padding: 3.5rem 2rem;
+}
+
+#search-view hr {
+    outline:none;
+    border: 1px solid gray;
+}
+
+#not-found {
+    text-align: center;
+    color: gray;
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+    font-size: 2vw;
+}
