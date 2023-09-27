@@ -192,8 +192,7 @@ def tips(book_id):
         except:
             fav_book = []
 
-        return render_template(
-            "tips.html",
+        return render_template("tips.html",
             book=book,
             sim_books=sim_books,
             fav_book = fav_book
@@ -237,6 +236,89 @@ def addtofav(book_id):
         return jsonify({'message': 'Added to favorites'})
 
 
+@app.route("/settings", methods=["GET", "POST"])
+def settings():
+    with sqlite3.connect("tentips.db") as con:
+        db = con.cursor()
+        
+        # Fetch info of current user from db 
+        user_id = session["id"]
+        user_info = db.execute("SELECT * FROM users WHERE id = ?", (user_id, ))
+        user_info = user_info.fetchone()
+
+        if request.method == "POST":
+            new_username = request.form.get("new_username")
+            old_password = request.form.get("old_password")
+            new_password = request.form.get("new_password")
+            confirm_password = request.form.get("confirm_password")
+
+            if new_username:
+            
+                # Ensure that username is of appropriate length
+                if len(new_username) < 3:
+                    return render_template("settings.html",
+                        user_info=user_info,
+                        u_len="enter altleast 3 characters"
+                    )
+                
+                # Check if username is already taken
+                usernames = db.execute("SELECT username FROM users")
+                usernames = usernames.fetchall()
+                if usernames:
+                    for username in usernames:
+                        if new_username == username[0]:
+                            return render_template("settings.html",
+                                user_info=user_info,
+                                taken="username already taken!",
+                            )
+                        
+                # Update the username in databasse
+                db.execute("UPDATE users SET username = ? WHERE id = ?", (new_username, user_info[0]))
+                return redirect("/settings")
+            
+            elif old_password:
+                hash = db.execute("SELECT hash FROM users WHERE id = ?", (user_info[0], ))
+                hash = hash.fetchone()
+
+                if not check_password_hash(hash[0], old_password):
+                    return render_template("settings.html", 
+                        user_info=user_info,
+                        error="Invalid password",
+                    )
+                
+                if len(new_password) < 8:
+                    return render_template("settings.html",
+                        user_info=user_info,
+                        p_len="enter atleast 8 characters!"
+                    )
+                
+                if new_password == old_password:
+                    return render_template("settings.html",
+                        user_info=user_info,
+                        p_len="Cannot use the same password!"
+                    )
+                
+                # Check if password match in both fields
+                if new_password != confirm_password:
+                    return render_template("settings.html",
+                        user_info=user_info,
+                        match="password do not match!"
+                    )  
+                
+                # Generate hash code of password and save in sql database
+                new_hash = generate_password_hash(new_password)
+                db.execute("UPDATE users SET hash = ? WHERE id = ?", (new_hash, user_info[0]))
+
+                return render_template("settings.html",
+                    user_info=user_info,
+                    changed="Password changed successfully"
+                )
+            
+        return render_template("settings.html",
+            user_info=user_info,
+        )       
+
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
@@ -254,11 +336,11 @@ def register():
                 return render_template("register.html", u_len="enter altleast 3 characters")
             
             # Check if username is already taken
-            temp = db.execute("SELECT username FROM users")
-            temp = temp.fetchall()
-            if temp:
-                for i in range(len(temp)):
-                    if username == temp[i][0]:
+            usernames = db.execute("SELECT username FROM users")
+            usernames = usernames.fetchall()
+            if usernames:
+                for u in usernames:
+                    if username == u[0]:
                         return render_template("register.html", taken="username already taken!")
                 
             # Ensure the password is of appropriate length    

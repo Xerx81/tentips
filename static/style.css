@@ -75,7 +75,7 @@ body {
 
 .navbar {
     overflow: hidden;
-    background-color: white;
+    background-color: rgba(255, 255, 255);
     box-shadow: 0px 2px 3px rgb(192, 192, 192);
     position: fixed;
     width: 100%;
@@ -186,7 +186,7 @@ a {
 
 
 .categories {
-    background-color: white; 
+    background-color: rgb(255, 255, 255, 0.8) ; 
     padding: 1rem 2rem;
     margin: 1rem;
     min-width: 10rem;
@@ -196,7 +196,7 @@ a {
 }
 
 .categories:hover {
-    background-color: whitesmoke;
+    background-color: white;
 }
 
 .categories>h1 {
@@ -268,7 +268,7 @@ hr {
     outline: none;
 }
 
-#tips-page, #admin-page, #fav-page {
+#tips-page, #admin-page, #fav-page, #settings-page{
     padding: 5rem 3rem;
 }
 
@@ -309,7 +309,7 @@ hr {
     transform: scale(1.5);
 }
 
-#fav-page {
+#fav-page{
     margin: 0 10vw;
 }
 
@@ -415,4 +415,58 @@ hr {
     color: gray;
     font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
     font-size: 2vw;
+}
+
+#settings-page {
+    margin: 0 15vw;
+    font-family: sans-serif;
+}
+
+#settings-page h2 {
+    font-family: 'Times New Roman', Times, serif ;
+}
+
+#set-inp {
+    margin: 5px;
+    padding: 0px 10px 0px 10px;
+    width: 15rem;
+    height: 2rem;
+    font-size: 15px;
+    color: rgb(25, 25, 25);
+    border: 1px solid gray;
+}
+
+#set-inp:focus {
+    outline: none;
+    border: 1px solid rgb(0, 136, 255);
+}
+
+#set-btn {
+    margin: 7px;
+    padding: 7px;
+    width: 8rem;
+    background-color:darkcyan;
+    color: white;
+    border: none;
+    font-size: 12px;
+}
+
+#set-btn:hover {
+    background-color: #037474;
+    cursor: pointer;
+}
+
+#logout-btn {
+    margin: 7px;
+    padding: 7px;
+    width: 8rem;
+    background-color: red;
+    color: white;
+    border: none;
+    font-size: 12px;
+}
+
+#logout-btn:hover {
+    background-color: rgb(255, 73, 73);
+    cursor: pointer;
 }
