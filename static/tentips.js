@@ -1,5 +1,32 @@
 document.addEventListener('DOMContentLoaded', () => {
     
+    // Responsive navbar
+    const toggle_btn = document.getElementsByClassName('toggle-nav')[0];
+    const items = document.getElementsByClassName('items')[0];
+    const search_bar = document.getElementsByClassName('search-bar')[0];
+
+    toggle_btn.addEventListener('click', () => {
+        items.classList.toggle('active');
+        search_bar.classList.toggle('active');
+    })
+
+    // Search button
+    const search_inp = document.querySelector('#search');
+    const search_btn = document.querySelector('#search-btn');
+    
+    search_btn.disabled = true;
+
+    search_inp.onkeyup = () => {
+        if (search_inp.value.length > 0 && search_inp.value !== " ") {
+            search_btn.disabled = false;
+            search_btn.classList.add('search-btn');
+        }
+        else {
+            search_btn.disabled = true;
+            search_btn.classList.remove('search-btn');
+        }
+    }
+
     if (document.title === 'Home') {
 
         // Change color theme of index page

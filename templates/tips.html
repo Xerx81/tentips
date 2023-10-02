@@ -36,13 +36,13 @@
         </div>
         <div id="recommendation">
             <h2>You might also like:</h2>
-            {% for sim_book in sim_books %}
-                {% if sim_book[0] != book[0] %}
-                    <div class="show-book">
-                        <a href="/tips/{{ sim_book[0] }}"><img class="book-cover" title="{{ sim_book[1] }}" src="{{ sim_book[4] }}" alt="book-cover"></a><br>
-                    </div>
-                {% endif %}
-            {% endfor %}
+            <div class="scroller">
+                {% for sim_book in sim_books %}
+                    {% if sim_book[0] != book[0] %}
+                        <a href="/tips/{{ sim_book[0] }}"><img class="book-cover" title="{{ sim_book[1] }}" src="{{ sim_book[4] }}" alt="book-cover"></a>
+                    {% endif %}
+                {% endfor %}
+            </div>
         </div>
     </div>
 {% endblock%}

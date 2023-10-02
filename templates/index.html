@@ -10,10 +10,9 @@
             <div id="home-view">
                 <div id="header">
                     <p id="header-tip">
-                        <span style="font-size:3rem;">Tip</span><br>
+                        <span style="font-size: 3rem;">Tip</span><br>
                         <span style="color: red">{{ rand_tip[0] }}: </span>{{ rand_tip[1] }}<br>
-                        <span style="font-size: 1.6vw; color:darkslateblue">-{{ rand_title }}</span><br>
-                        <span style="font-size: 5vw;">📖</span>
+                        <span style="font-size: 1.6rem; color:darkslateblue">-{{ rand_title }}</span><br>
                     </p>
                     <button id="change-color" title="Change color">🖌️</button>
                 </div>
@@ -21,15 +20,13 @@
                     <section class="categories">
                         <h1>{{ category[1].capitalize() }}:-</h1>
                         <hr>
-                        {% for book in books %}
-                            {% if book[6] == category[0] %}
-                                <div class="show-book">
-                                    <a href="/tips/{{ book[0] }}">
-                                        <img class="book-cover" title="{{ book[1] }}" src="{{ book[4] }}" alt="book-cover">
-                                    </a><br>
-                                </div>
-                            {% endif %}
-                        {% endfor %}
+                        <div class="scroller">
+                            {% for book in books %}
+                                {% if book[6] == category[0] %}
+                                    <a href="/tips/{{ book[0] }}"><img class="book-cover" title="{{ book[1] }}" src="{{ book[4] }}" alt="book-cover"></a>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
                     </section>
                 {% endfor %}
             </div>
@@ -39,17 +36,17 @@
             <h4 style="color: gray;">< Search results for "{{ searched_title }}" ></h4>
             {% if search_results %}
                 <h2 style="color: darkcyan;">Is this what you're looking for?</h2><hr>
-                {% for book in search_results %}
-                    <div class="show-book">
+                <div class="scroller">
+                    {% for book in search_results %}
                         <a href="/tips/{{ book[0] }}">
                             <img class="book-cover" title="{{ book[1] }}" src="{{ book[4] }}" alt="book-cover">
-                        </a><br>
-                    </div>
-                {% endfor %}
+                        </a>
+                    {% endfor %}
+                </div>
             {% else %}
                 <hr>
                 <div id="not-found">
-                    <img src="/static/images/no-results.png" alt="no results" width="15%">
+                    <img src="/static/images/no-results.png" alt="no results" width="15%" style="min-width: 10rem">
                     <p>No results.</p>
                 </div>
             {% endif %}

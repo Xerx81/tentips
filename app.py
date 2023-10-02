@@ -114,7 +114,7 @@ def admin():
         db = con.cursor()
 
         # Show this page to admin only
-        admin_username = "yuvraj"
+        admin_username = "Xerx"
         admin_id = db.execute("SELECT id FROM users WHERE username = ?", [admin_username])
         admin_id = admin_id.fetchone()
 
