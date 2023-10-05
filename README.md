@@ -9,7 +9,7 @@
 - [Features](#features)
 - [Project Structure](#project-structure)
 - [Project Details](#project-details)
-- [Installation](#installation)
+- [Source Code](#source-code)
 
 ## Features
 
