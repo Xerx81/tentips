@@ -1,6 +1,5 @@
 # Tentips
 #### Website link: http://tentips.pythonanywhere.com/
-#### Video Demo: <https://youtu.be/XyZbTDRnjNU>
 ## Description
 
 **Tentips** is a simple website that provides ten valuable tips from various kinds of books. Whether you're interested in self-improvement, business, or just looking for some inspiration, Tentips has you covered. This README file provides an overview of the website's structure.
