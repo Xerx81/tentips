@@ -136,6 +136,43 @@ a {
     color:#0084ff;
 }
 
+.search-bar form {
+    display: flex;
+    text-align: center;
+}
+
+#search {
+    width: 100%;
+    height: 30px;
+    padding: 0px 15px;
+    border: 2px solid gray;
+    border-radius: 20px;
+    color:darkslategray;
+    font-size: 17px;
+}
+
+#search:focus {
+    border-color: darkcyan;
+    outline: none;
+    box-shadow: 0px 2px 3px darkcyan;
+}
+
+#search-btn {
+    padding: 9px 12px;
+    margin-left: 5px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.search-btn:hover {
+    color: white;
+    background-color: darkcyan;
+    box-shadow: 0px 2px 5px darkcyan;
+    outline: none;
+}
+
 @media (max-width: 720px) {
     .toggle-nav {
         display: flex;
@@ -174,43 +211,6 @@ a {
     }
 }
 
-.search-bar form {
-    display: flex;
-    text-align: center;
-}
-
-#search {
-    width: 100%;
-    height: 30px;
-    padding: 0px 15px;
-    border: 2px solid gray;
-    border-radius: 20px;
-    color:darkslategray;
-    font-size: 17px;
-}
-
-#search:focus {
-    border-color: darkcyan;
-    outline: none;
-    box-shadow: 0px 2px 3px darkcyan;
-}
-
-#search-btn {
-    padding: 9px 12px;
-    margin-left: 5px;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.search-btn:hover {
-    color: white;
-    background-color: darkcyan;
-    box-shadow: 0px 2px 5px darkcyan;
-    outline: none;
-}
-
 #homepage {
     padding: 3.5rem 0rem;
     background-color: lightgray;
@@ -238,14 +238,47 @@ a {
 
 .scroller {
     white-space: nowrap;
-    overflow: scroll;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+    overflow-x: auto;
+    overflow-y: hidden;
     padding: 10px;
 }
 
 .scroller::-webkit-scrollbar {
-    display: none;
+    height: 20px;
+}
+
+.scroller::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.scroller::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}
+
+.scroller::-webkit-scrollbar-button:single-button {
+    background-color: transparent;
+    display: block;
+    border-style: solid;
+    height: 13px;
+    width: 16px;
+}
+
+.scroller::-webkit-scrollbar-button:single-button:horizontal:decrement {
+    border-width: 10px 20px 10px 0; 
+    border-color: transparent #d18b11 transparent transparent;
+}
+
+.scroller::-webkit-scrollbar-button:horizontal:decrement:hover{
+  border-color: transparent #ffaa18 transparent transparent;
+}
+
+.scroller::-webkit-scrollbar-button:horizontal:increment{
+  border-width: 10px 0 10px 20px;
+  border-color: transparent transparent transparent #d18b11;
+}
+
+.scroller::-webkit-scrollbar-button:horizontal:increment:hover{
+  border-color: transparent transparent transparent #ffaa18;
 }
 
 hr {
@@ -385,7 +418,7 @@ hr {
     }
 
     #content ol {
-        padding: 15px;
+        padding: 20px;
     }
 }
 
