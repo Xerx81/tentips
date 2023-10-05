@@ -51,7 +51,10 @@ The Tentips website is built using the Flask web framework, a Python-based tool 
 
 Here are some screenshots of the Tentips website to give you a visual overview of its user interface and features:
 
-
+![register](https://github.com/Xerx81/tentips/assets/91129128/e0be52ac-6c08-4637-ab6f-9077bf97d765)
+![homepage](https://github.com/Xerx81/tentips/assets/91129128/9d0aff3c-ab71-48c5-85b1-fd68c8951de9)
+![tips page](https://github.com/Xerx81/tentips/assets/91129128/8387abaa-f420-4e75-b4af-0b400a6d8687)
+![favorites](https://github.com/Xerx81/tentips/assets/91129128/1351468d-47c2-42da-9800-bb5798912990)
 
 ## Source Code
 
