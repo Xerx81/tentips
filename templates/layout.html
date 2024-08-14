@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>{% block title %}{% endblock %}</title>
+        
+        <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
+        <link rel="stylesheet" href="/static/style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <script src="/static/tentips.js"></script>
+    </head>
+    <body>
+        <div class="navbar">
+            <div class="logo">
+                <a href="/">
+                    <span style="color:cornflowerblue">Ten</span><span style="color:coral">tips</span>
+                </a>
+            </div>
+            <div class="search-bar">
+                <form action="/" method="POST">
+                    <input name="search" id="search" type="text" placeholder="search" autocomplete="off">
+                    <button id="search-btn" type="submit"><i class="fa fa-search icon"></i></button>
+                </form>
+            </div>
+            <a class="toggle-nav"><i class="fa fa-bars icon"></i></a>
+            <div class="items">
+                <ul>
+                    <a href="/favorites" id="favorites-btn"><li><i style="color: #ffea00" class="fa fa-star icon"></i> Favorites</li></a>
+                    <a href="/settings"><li><i class="fa fa-cog icon" style="color: gray;"></i> Settings</li></a>
+                </ul>
+            </div>
+        </div>
+        {% block main %}{% endblock %}
+    </body>
+</html>

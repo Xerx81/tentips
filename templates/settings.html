@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Settings
+{% endblock %}
+
+{% block main %}
+    <div id="settings-page">
+        <h2>Account Settings</h2><hr>
+        <p>Logged in as <strong>"{{ user_info[1] }}"</strong></p>
+        <form action="/settings" method="post">
+            <label for="username">Username</label><br>
+            <input class="set-inp" name="new_username" type="text" value="{{ user_info[1] }}" placeholder="New Username"><span style="color: red; font-size: 14px;">{{ taken }}{{ u_len }}</span><br>
+            <button class="set-btn" type="submit">Change Username</button><br><br>
+        </form>
+        <form action="/settings" method="post">
+            <label for="old_password">Password</label><br>
+            <input class="set-inp" type="password" name="old_password" placeholder="Old Password"><span style="color: red; font-size: 14px;">{{ error }}</span><br>
+            <input class="set-inp" type="password" name="new_password" placeholder="New Password"><span style="color: red; font-size: 14px;">{{ p_len }}</span><br>
+            <input class="set-inp" type="password" name="confirm_password" placeholder="Confirm Password"><span style="color: red; font-size: 14px;">{{ match }}</span><br>
+            <button class="set-btn">Change Password</button>
+        </form>
+        <p style="color: rgb(9, 190, 9)">{{ changed }}</p>
+        <hr>
+        <a href="/logout" id="logout"><button id="logout-btn">Log Out</button></a>
+    </div>
+{% endblock %}

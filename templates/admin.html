@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Admin
+{% endblock %}
+
+{% block main %}
+    <div id="admin-page" style="text-align: center">
+        <form action="/admin" method="POST">
+            <input type="text" name="title" placeholder="title" autocomplete="off" autofocus required><br><br>
+            <input type="text" name="author" placeholder="author" autocomplete="off" autofocus required><br><br>
+            <textarea type="text" name="description" placeholder="description" autocomplete="off" rows="5" cols="50" required></textarea><br><br>
+            <input type="text" name="image" placeholder="image" autocomplete="off" required><br><br>
+            <input type="text" name="new_category" placeholder="New Category" autocomplete="off"> or
+            <select name="category">
+                <option disabled selected>Categories</option>
+                {% for category in categories %}
+                    <option value="{{ category[0] }}">{{ category[0] }}</option>
+                {% endfor %}
+            </select><br><br>
+            <textarea type="text" name="tips" placeholder="tips" autocomplete="off" rows="18" cols="100" required></textarea><br><br>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Favorites
+{% endblock %}
+
+{% block main %}
+    <div id="fav-page">
+        <h1 id="fav-header">Favorites</h1>
+        <hr>
+        {% if fav_books %}
+            <div id="fav-section">
+                {% for fav_book in fav_books %}
+                    <div class="fav-book">
+                        <button class="rem-fav" onclick="rem_fav(`{{ fav_book[0] }}`)">
+                            <i class="fa fa-trash icon" title="Remove from favorites"></i>
+                        </button>
+                        <a href="/tips/{{ fav_book[0] }}" class="fav-link">
+                            <img class="fav-img" src="{{ fav_book[6] }}" alt="book-cover">
+                            <div class="details">
+                                <strong>Title:</strong> {{ fav_book[3] }} <br>
+                                <strong>Author:</strong> {{ fav_book[4] }} <br>
+                                <strong>Category:</strong> {{ fav_book[10] }} <br><br>
+                                <strong> Description:</strong> {{ fav_book[5] }}
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div id="default-fav">
+                <h2>👀</h2>
+                <p>Nothing to see here yet.</p>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %} 

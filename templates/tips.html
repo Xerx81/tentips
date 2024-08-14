@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Tips
+{% endblock %}
+
+{% block main %}
+    <div id="tips-page">
+        <div id =container>
+            <div id="sidebar">
+                <div style="text-align: center">
+                    <img id="sidebar-img" src="{{ book[4] }}" alt="book cover">
+                </div>
+            </div>
+            <div id="content">
+                <h3>
+                    {{ book[1] }} by {{ book[2] }}
+                    {% if fav_book %}
+                        <i class="fa fa-star icon addtofav yellow" id="addtofav" title="Add to favorites" onclick="favorite(`{{ book[0] }}`)"></i>
+                    {% else %}
+                        <i class="fa fa-star icon addtofav" id="addtofav" title="Add to favorites" onclick="favorite(`{{ book[0] }}`)"></i>
+                    {% endif %}
+                </h3>
+                <hr>
+                <p>{{ book[3] }}</p>
+                <ol>
+                    {% for tip in book[5].split('#') %}
+                        <li>
+                            {% set parts = tip.split(':') %}
+                            <strong style="color:coral">{{ parts[0] }}:</strong> <span>{{ parts[1] }}</span>
+                        </li>
+                        <br>
+                    {% endfor %}
+                </ol>
+            </div>
+        </div>
+        <div id="recommendation">
+            <h2>You might also like:</h2>
+            <div class="scroller">
+                {% for sim_book in sim_books %}
+                    {% if sim_book[0] != book[0] %}
+                        <a href="/tips/{{ sim_book[0] }}"><img class="book-cover" title="{{ sim_book[1] }}" src="{{ sim_book[4] }}" alt="book-cover"></a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock%}

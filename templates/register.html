@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Register</title>
+        
+        <link rel="stylesheet" href="/static/style.css">
+        <script src="/static/tentips.js"></script>
+    </head>
+    <body>
+        <div class="reg-box">
+            <h1 id="reg-logo"><span style="color:cornflowerblue">Ten</span><span style="color:coral">tips</span></span></h1>
+            <p id="reg-info">Register to get tentips from various kinds of books and get smarter.</p>
+            <div class="reg-form">
+                <form action="/register" method="post">
+                    <input class="reg-inp" name="username" type="text" autocomplete="off" placeholder="Username" required>
+                    <br>
+                    <label style="color: red">{{ taken }}</label>
+                    <label style="color: darkcyan">{{ u_len }}</label>
+    
+                    <input class="reg-inp" id="password" name="password" type="password" autocomplete="off" placeholder="Password" required>
+                    <input class="showpass" type="checkbox" onclick="showPass()">
+                    <br>
+                    <label style="color: darkcyan">{{ p_len }}</label>
+    
+                    <input class="reg-inp" name="confirmation" type="password" autocomplete="off" placeholder="Confirm-password" required>
+                    <br>
+                    <label style="color: darkorange">{{ match }}</label>
+    
+                    <button id="reg-btn" type="submit">Register</button>
+                </form>
+            </div>
+            <p id="reg-caution">It is not recommended to use a password you use at different platforms!</p>
+        </div>
+        <div class="reg-box" style="margin-top: 1rem">
+            <p id="reg-redirect">
+                Already have an account?
+                <a href="/login">Log in</a>
+            </p>
+        </div>    
+    </body>
+</html>
+    

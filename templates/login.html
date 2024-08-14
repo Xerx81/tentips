@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Log in</title>
+        
+        <link rel="stylesheet" href="/static/style.css">
+
+        <script src="/static/tentips.js"></script>
+    </head>
+    <body>
+        <div class="reg-box">
+            <h1 id="reg-logo"><span style="color:cornflowerblue">Ten</span><span style="color:coral">tips</span></span></h1>
+            <div class="reg-form">
+                <form action="/login" method="post">
+                    <input class="reg-inp" name="username" type="text" autocomplete="off" placeholder="Username" required>
+                    <input class="reg-inp" id="password" name="password" type="password" autocomplete="off" placeholder="Password" required>
+                    <input class="showpass" type="checkbox" onclick="showPass()">
+                    <br>
+                    <label style="color: red">{{ error }}</label>
+                    <button id="reg-btn" type="submit">Log in</button>
+                </form>
+            </div>
+        </div>
+        <div class="reg-box" style="margin-top: 1rem">
+            <p id="reg-redirect">
+                Don't have an account?
+                <a href="/register">Register</a>
+            </p>
+        </div>    
+    </body>
+</html>
