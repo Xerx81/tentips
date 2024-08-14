@@ -32,7 +32,6 @@ def index():
     with sqlite3.connect("tentips.db") as con:
         db = con.cursor()
 
-        
         books = db.execute("SELECT * FROM books ORDER BY id DESC")
         books = books.fetchall()
 
@@ -66,13 +65,9 @@ def index():
             # Execute the SQL query to search for titles and fetch them
             search_results = db.execute("SELECT * FROM books WHERE title LIKE ?", (search_query, ))
             search_results = search_results.fetchall()
-            # not_found = ""
-            # if not search_results:
-            #     not_found = "Book not found"
 
             return render_template("index.html",
                 search_results=search_results,
-                # not_found=not_found,
                 searched_title=searched_title
             )
 
